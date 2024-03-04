@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.markdown-container {
+  color: #282c34;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-top: 20px;
+  background-color: #e13333;
+  border-radius: 8px;
+  overflow: auto;
+  height: 90%; /* Adjust as needed */
+}
+.markdown-containers {
+  display: flex;
+justify-items: center;
+align-items: center;
+}
+
+.demo {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 100%;
+  white-space: pre-line;
+}
+
+.demos {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color:  #f0745a;
+  color: white
+}
