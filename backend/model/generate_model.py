@@ -19,7 +19,7 @@ def generate_model(prompt, model, top_p=1, temperature=0.7, frequency_penalty=0,
         response = requests.post(
             url="https://openrouter.ai/api/v1/chat/completions",
             headers={
-                "Authorization": f"Bearer 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",
+                "Authorization": f"Bearer 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",
             },
             data=json.dumps({
                 "model": f'{model}',  #"teknium/openhermes-2.5-mistral-7b", # Optional
