@@ -57,7 +57,7 @@ const App = () => {
       )
       .then((response) => {
         // Handle successful logout
-        console.log(response.data.message);
+
         localStorage.removeItem("token");
         setToken("");
         window.location.href = "/About";

@@ -72,7 +72,6 @@ const HomePage = () => {
 
     getCurrentDateTime();
   }, []);
-  console.log(fileMessage);
 
   const handleLanguageChange = (event) => {
     setSelectedLanguage(event.target.value);
@@ -91,9 +90,6 @@ const HomePage = () => {
       await setLoading(true);
       await setFileMessage("sasd");
 
-      console.log(TopP)
-      console.log(tempurature)
-      console.log(token)
       
       const formData = new FormData();
 
@@ -105,7 +101,6 @@ const HomePage = () => {
       formData.append("token", token);
 
 
-      console.log("formData", formData);
       const response = await axios.post(
         "https://infinity-experiment.onrender.com/api/upload",
         formData,
@@ -117,8 +112,7 @@ const HomePage = () => {
       );
 
       if (response.data) {
-        console.log("enter");
-        console.log(response);
+
         const filePath = response.data;
         // Fetch or display the content of the generated JSON file as needed
         // For example, you might want to fetch the content and log it
@@ -129,7 +123,7 @@ const HomePage = () => {
         await setKeyword(flattenedArray);
 
         let filesname = file.name.replace(/\.xml$/, ""); // Removes the ".xml" extension
-        console.log(filesname); // Output: "some"
+
         let somes = [
           {
             id: 1,
@@ -160,7 +154,6 @@ const HomePage = () => {
         }
 
         await setLoading(false);
-        console.log(`Story generated successfully.`);
       } else {
         console.error("Failed to generate story.");
       }
@@ -172,7 +165,6 @@ const HomePage = () => {
   const CodeSnippets = () => {
     const markdownContent = `${fileMessage}`;
 
-    console.log(markdownContent);
     return (
       <div className="demo">
         <CopyBlock
@@ -228,12 +220,6 @@ const HomePage = () => {
                     </Text>
                   </div>
                 </Button>
-                {/* <Button
-                  className=" text-white font-bold py-2 px-4 rounded"
-                  onClick={handleButtonClick}
-                >
-                  Select File
-                </Button> */}
                 <Select
                   placeholder="Select model"
                   onChange={handleModelChange}

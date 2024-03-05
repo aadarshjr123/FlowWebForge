@@ -40,7 +40,6 @@ const HistoryPage = () => {
   const [data, setData] = useState(null);
   const navigate = useNavigate();
 
-  console.log(navigate)
   let some;
   useEffect(() => {
     const getData = async () => {
@@ -58,7 +57,6 @@ const HistoryPage = () => {
   const CodeSnippet = (response) => {
     const markdownContent = `${response}`;
 
-    console.log(markdownContent);
     return (
       <ReactMarkdown className="markdown-container">
         {markdownContent}

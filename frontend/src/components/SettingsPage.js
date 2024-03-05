@@ -30,6 +30,7 @@ const SettingsPage = () => {
   const [username, setUserNameData] = useState("");
   const [email, setEmailData] = useState("");
   const [password, setPasswordData] = useState("");
+  const [saveEnabled, setSaveData] = useState(false);
   const [token, setToken] = useState(false);
 
   const toast = useToast()
@@ -47,6 +48,7 @@ const SettingsPage = () => {
         const result = await fetchData();
         setUserNameData(result.user.username)
         setEmailData(result.user.email)
+        setSaveData(Boolean(result.user.saveEnabled))
       }
     }
     getData();
@@ -68,6 +70,9 @@ const SettingsPage = () => {
     const password = e.target.value;
     setPasswordData(password);
   };
+  const handleSwitchChange = () => {
+    setSaveData(prevSaveEnabled => !prevSaveEnabled);
+  };
 
 
 
@@ -81,6 +86,7 @@ const SettingsPage = () => {
         username: username,
         email: email,
         password: password,
+        saveEnabled: saveEnabled,
       }
     ]
     
@@ -95,7 +101,6 @@ const SettingsPage = () => {
     );
 
     if (saveResponse.data) {
-      console.log("data is saved");
       toast({
         title: 'Account Update.',
         description: "We've updated your account for you.",
@@ -146,6 +151,19 @@ const SettingsPage = () => {
           name="password"
           value={password}
           onChange={handlePasswordChange}
+        />
+      </FormControl>
+
+      <FormControl ml={50} display="flex" alignItems="center" mt={10}>
+        <FormLabel  htmlFor="save-switch" mb="0">
+        Do you want to save your Prompt ?
+        </FormLabel>
+        <Switch 
+          id="save-switch"
+          colorScheme="orange"
+          isChecked={saveEnabled}
+          onChange={handleSwitchChange}
+          ml={2}
         />
       </FormControl>
       <Button

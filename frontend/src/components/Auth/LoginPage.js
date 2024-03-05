@@ -10,8 +10,6 @@ const LoginPage = () => {
 
   const handleLogin = () => {
     // Handle login logic here
-    console.log("Username:", typeof email);
-    console.log("Password:", typeof password);
 
     const data = {
       email: email,
@@ -26,7 +24,7 @@ const LoginPage = () => {
       body: JSON.stringify(data),
     })
     .then(response => {
-      console.log("enter")
+
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -34,7 +32,6 @@ const LoginPage = () => {
     })
     .then(data => {
       navigate('/About');
-      console.log(data)
       localStorage.setItem('token', data.message);
       window.location.reload();
     })

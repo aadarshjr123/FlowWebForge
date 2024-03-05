@@ -36,7 +36,6 @@ const UpdateProfile = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(user._id);
     // updateProfile(user._id, name, email, password);
     toast({
       title: "User updated Successfully",
@@ -47,18 +46,6 @@ const UpdateProfile = () => {
   };
 
   const handleDelete = () => {
-    // deleteUser().then((res) => {
-    //   if (res.success) {
-    //     toast({
-    //       title: res.success,
-    //       status: "success",
-    //       duration: 3000,
-    //       isClosable: true,
-    //     });
-    //     localStorage.removeItem("token");
-    //     navigate("/login");
-    //   }
-    // });
   };
 
   return (

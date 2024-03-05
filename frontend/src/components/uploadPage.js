@@ -36,13 +36,11 @@ const UploadPage = () => {
 
       if (response.data.success) {
         const filePath = response.data;
-        console.log(filePath)
         // Fetch or display the content of the generated JSON file as needed
         // For example, you might want to fetch the content and log it
         
         setFileMessage(filePath.data)
         setLoading(false)
-        console.log(`Story generated successfully.`);
       } else {
         console.error('Failed to generate story.');
       }

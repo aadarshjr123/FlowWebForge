@@ -27,8 +27,6 @@ const RegisterPage = () => {
   const handleRegister = () => {
     // Handle registration logic here
 
-    console.log(firstName)
-    console.log(lastName)
 
 
     const data = {
@@ -39,7 +37,6 @@ const RegisterPage = () => {
       email:email
     };
 
-    console.log(data)
   
     // Send a POST request to the backend
     let some = fetch('https://infinity-experiment.onrender.com/api/signup', {
@@ -50,14 +47,13 @@ const RegisterPage = () => {
       body: JSON.stringify(data),
     })
     .then(response => {
-      console.log("enter")
+
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
       return response.json();
     })
     .then(data => {
-      console.log('Success:', data);
       // Handle success response from the backend here
       navigate('/login');
     })
