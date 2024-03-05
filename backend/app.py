@@ -5,6 +5,7 @@ import datetime
 from flask_cors import CORS
 import os
 import jwt
+import json
 import re
 from pymongo import MongoClient
 from generate_textDes import generate_story
@@ -42,12 +43,9 @@ def token_required(f):
         if not token:
             return jsonify({'error': 'Token is missing'}), 401
         
-        # Remove "Bearer " prefix
-        cleaned_token = token[7:]
-
         try:
             print(token)
-            data = jwt.decode(cleaned_token, app.config['SECRET_KEY'], algorithms=['HS256'])
+            data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
             print("Data: ", data)
         except Exception as e:
             return jsonify({'error': 'Token is invalid'}), 401
@@ -65,6 +63,8 @@ def deploy_test():
 
 @app.route('/api/upload', methods=['POST'])
 def upload_file():
+
+
     if 'file' not in request.files:
         return jsonify({'error': 'No file part'})
 
@@ -268,15 +268,33 @@ def get_user_details(user_id):
 @app.route('/api/addUserStories', methods=['POST'])
 def add_sample_data():
     data = request.json  # Assuming the data is sent as JSON
+    token = request.headers.get('Authorization')
 
-    add_sample_data_to_mongodb(data)
+
+    print("toekn",token)
+    decoded_token = jwt.decode(token, app.config['SECRET_KEY'], algorithms='HS256')
+
+
+    add_sample_data_to_mongodb(data,decoded_token['email'])
     return "Sample data added to MongoDB."
 
 
-@app.route('/api/retriveRecords/<int:user_id>', methods=['GET'])
-def retrive_user_data(user_id):
-    document = retrive_user_data_from_mongodb(user_id)
+@app.route('/api/retriveRecords', methods=['GET'])
+@token_required
+def retrive_user_data():
+    token = request.headers.get('Authorization')
+    print("token",token)
+    try:
+        decoded_token = jwt.decode(token, app.config['SECRET_KEY'], algorithms='HS256')
+
+        
+        document = retrive_user_data_from_mongodb(decoded_token['email'])
+
+    except Exception as e:
+        return jsonify({'error': 'Token is invalid'}), 401
+    
     return document
+
 
 @app.route('/')
 def hello_world():

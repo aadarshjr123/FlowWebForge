@@ -2,7 +2,7 @@ from pymongo import MongoClient
 from flask import jsonify
 import base64
 
-def retrive_user_data_from_mongodb(user): 
+def retrive_user_data_from_mongodb(email): 
     # Connect to MongoDB
     
     uri = f"mongodb+srv://teaminfinity:Teaminfinity@teaminfinity.pcppgcb.mongodb.net/?retryWrites=true&w=majority"
@@ -12,7 +12,7 @@ def retrive_user_data_from_mongodb(user):
     collection = db['userrecorddata']
 
     # Define the query to retrieve the document with the given user_id
-    query = {"id": user}
+    query = {"email": email}
 
     print(query)
 

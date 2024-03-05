@@ -14,11 +14,12 @@ def format_text(text):
 
 def get_user_records(tokenEmail):
     # Connect to MongoDB
-    uri = "mongodb+srv://admin:root@cluster0.57k7dnh.mongodb.net/"
+    # Connect to MongoDB
+    uri = f"mongodb+srv://teaminfinity:Teaminfinity@teaminfinity.pcppgcb.mongodb.net/?retryWrites=true&w=majority"
 
     client = MongoClient(uri)
-    db = client["team_infinity"]
-    collection = db['userRecordData']
+    db = client["teaminfinity"]
+    collection = db['userrecorddata']
 
     # Query to get all documents with the email that is passed in the token
     query = {"email": tokenEmail}
