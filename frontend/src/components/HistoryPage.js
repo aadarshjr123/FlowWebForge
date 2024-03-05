@@ -34,7 +34,12 @@ const theme = extendBaseTheme({
 const fetchData = async () => {
   try {
     const response = await axios.get(
-      "https://infinity-experiment.onrender.com/api/retriveRecords/1"
+      "http://127.0.0.1:5000/api/retriveRecords",
+      {
+        headers: {
+          Authorization : localStorage.getItem('token')
+        }
+      }
     );
     console.log("response", response.data);
     return response.data;

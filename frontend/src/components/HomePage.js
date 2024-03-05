@@ -107,7 +107,7 @@ const HomePage = () => {
 
       console.log("formData", formData);
       const response = await axios.post(
-        "https://infinity-experiment.onrender.com/api/upload",
+        "http://127.0.0.1:5000/api/upload",
         formData,
         {
           headers: {
@@ -145,11 +145,12 @@ const HomePage = () => {
         ];
 
         const saveResponse = await axios.post(
-          "https://infinity-experiment.onrender.com/api/addUserStories",
+          "http://127.0.0.1:5000/api/addUserStories",
           somes,
           {
             headers: {
               "Content-Type": "application/json",
+              Authorization: localStorage.getItem('token'),
             },
           }
         );

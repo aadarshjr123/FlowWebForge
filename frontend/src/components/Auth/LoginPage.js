@@ -18,7 +18,7 @@ const LoginPage = () => {
       password: password,
     };
 
-    let some = fetch('https://infinity-experiment.onrender.com/api/login', {
+    let some = fetch('http://127.0.0.1:5000/api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
