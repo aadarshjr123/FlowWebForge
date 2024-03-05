@@ -15,8 +15,6 @@ def add_sample_data_to_mongodb(sample_data,email):
     # Append email to each document in sample_data
     for data in sample_data:
         data["email"] = email  # Append the email to the document
-        
-    print(data)
     
     # Insert the sample data into the collection
     for data in sample_data:

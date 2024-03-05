@@ -44,7 +44,7 @@ def token_required(f):
             return jsonify({'error': 'Token is missing'}), 401
         
         try:
-            print(token)
+
             data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
             print("Data: ", data)
         except Exception as e:
@@ -79,7 +79,6 @@ def upload_file():
     top_k = int(request.form.get('top_k', 0)) if 'top_k' in request.form else 0
     max_tokens = int(request.form.get('token', 2311)) if 'token' in request.form else 2311
 
-    print(language)
     if file.filename == '':
         return jsonify({'error': 'No selected file'})
 
@@ -92,20 +91,18 @@ def upload_file():
         for name_value in names_data:
             data_list.append(name_value)
 
-
-        print(data_list)
         # Define a dictionary mapping user inputs to functions
         function_mapping = {
             "operhermes": "teknium/openhermes-2.5-mistral-7b",
             "gpt4": "openai/gpt-4-turbo-preview",
         }
-        # print("result",result)
+
         try:
 
             if model in function_mapping:
 
                 selected_function = function_mapping[model]
-                print("model",selected_function)
+
 
                 appendText_Array = f'convert this to text paragraph, {data_list}'
 
@@ -122,13 +119,12 @@ def upload_file():
                     top_k=top_k if 'top_k' in locals() else 0,
                     max_tokens=max_tokens if 'max_tokens' in locals() else 2311)
 
-                print(generated_story)
+
 
                 appendText_Story = f'create an simple code snippets with the given paragraph in {language}, {generated_story}'
 
                 generated_code = generate_model(appendText_Story,selected_function)
 
-                print(generated_code)
                 # Assuming the generated story is saved in a known location
                 # generated_file_path = os.path.join(frontend_folder, 'bpmntocodesnippet-frnt', 'src', 'uploads', 'generated_story.json')
 
@@ -157,13 +153,6 @@ def sign_up():
     password = data.get('password')
     email = data.get('email')
 
-
-
-    print(first_name)
-    print(last_name)
-    print(username)
-    print(password)
-    print(email)
     
     if not username or not password or not email:
         return jsonify({'error': 'Username, email, and password are required'}), 400
@@ -202,7 +191,6 @@ def update_user():
 
     data = request.get_json() 
 
-    print("data",data)
     for item in data:
         userid = item.get('userid')
         username = item.get('username')
@@ -213,15 +201,12 @@ def update_user():
     # Hash the password
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
-    print(type(userid))
     result = users_collection.update_one(
         {"userId": userid},
         {"$set": {"username": username, "email": email, "password": hashed_password,'saveEnabled': saveEnabled}}
     )
 
-    print("result",result)
     if result.modified_count > 0:
-        print("enter")
         return jsonify({"success": True})
     else:
         return jsonify({"success": False, "error": "User not found"})
@@ -252,9 +237,7 @@ def logout():
 
 @app.route('/api/user/<int:user_id>', methods=['GET'])
 def get_user_details(user_id):
-    print(user_id)
     user = users_collection.find_one({'userID': str(user_id)})
-    print(user)
     if user:
         del user['_id']  
         del user['password']  
@@ -270,8 +253,6 @@ def add_sample_data():
     data = request.json  # Assuming the data is sent as JSON
     token = request.headers.get('Authorization')
 
-
-    print("toekn",token)
     decoded_token = jwt.decode(token, app.config['SECRET_KEY'], algorithms='HS256')
 
 
@@ -283,7 +264,7 @@ def add_sample_data():
 @token_required
 def retrive_user_data():
     token = request.headers.get('Authorization')
-    print("token",token)
+
     try:
         decoded_token = jwt.decode(token, app.config['SECRET_KEY'], algorithms='HS256')
 
@@ -298,7 +279,7 @@ def retrive_user_data():
 
 @app.route('/')
 def hello_world():
-    return 'Hello, World!'
+    return 'App is running'
 
 if __name__ == '__main__':
     app.run(debug=True)

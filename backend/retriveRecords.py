@@ -14,8 +14,6 @@ def retrive_user_data_from_mongodb(email):
     # Define the query to retrieve the document with the given user_id
     query = {"email": email}
 
-    print(query)
-
     # Retrieve the document with the given user_id
     document = list(collection.find(query))
 

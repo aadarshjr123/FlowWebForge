@@ -11,8 +11,6 @@ generated_file_path = os.path.join(frontend_folder, 'src', 'uploads', 'generated
 
 def generate_model(prompt, model, top_p=1, temperature=0.7, frequency_penalty=0, presence_penalty=1.25, repetition_penalty=1, top_k=0, max_tokens=2311):
 
-    print("prompt",prompt)
-    print("model",model)
 
     try:
 
