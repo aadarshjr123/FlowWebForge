@@ -14,7 +14,7 @@ import axios from "axios";
 const fetchData = async () => {
   try {
     const response = await axios.get(
-      "http://127.0.0.1:5000/api/user/1"
+      "https://infinity-experiment.onrender.com/api/user/1"
     );
     console.log("response", response.user);
     return response.data;
@@ -94,7 +94,7 @@ const SettingsPage = () => {
     console.log("Saving data:", userData);
     
     const saveResponse = await axios.post(
-      "http://127.0.0.1:5000/api/updateUser",
+      "https://infinity-experiment.onrender.com/api/updateUser",
       userData,
       {
         headers: {

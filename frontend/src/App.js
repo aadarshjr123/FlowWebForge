@@ -47,7 +47,7 @@ const App = () => {
     // Make a POST request to the logout API endpoint
     axios
       .post(
-        "http://127.0.0.1:5000/api/logout",
+        "https://infinity-experiment.onrender.com/api/logout",
         {},
         {
           headers: {

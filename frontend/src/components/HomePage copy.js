@@ -323,7 +323,7 @@ let somess = `<?xml version="1.0" encoding="UTF-8"?>
 
 const fetchData = async () => {
   try {
-    const response = await axios.get('http://127.0.0.1:5000/api/retriveRecords/1');
+    const response = await axios.get('https://infinity-experiment.onrender.com/api/retriveRecords/1');
     return response;
   } catch (error) {
     console.error('Error fetching data:', error);
